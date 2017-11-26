@@ -130,6 +130,7 @@ func _file_selected(path):
 	dir_chooser_dialog.update()
 
 func _set_file_destination(dest,src):
+	dir_chooser_dialog.disconnect("dir_selected",self,"_set_file_destination")
 	filelist.add_item(src+"|"+dest)
 
 func _remove_file():
