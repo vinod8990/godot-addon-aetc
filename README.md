@@ -1,5 +1,7 @@
 # Android Export Template Generator
 
+> This addon is made for Linux distributions and tested only on LINUX. Adding support for Windows/Mac should not be a problem, it's just a matter of finding the replacements for some specific commands. Contributions are always welcome. 
+
 This is an addon for Godot Engine which generates android export templates with one click of a button(obviously after setting up config directories).
 
 It is advised to follow the following structure for every projects so that you can manage all of them later easily.
