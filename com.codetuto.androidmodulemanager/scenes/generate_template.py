@@ -44,8 +44,9 @@ def _copy_files():
 		for file in files:
 			head,tail = os.path.split(file['srcfile'])
 			destfile = os.path.join(file['destdir'],tail)
-			print("\n>>Backing up " + destfile)
-			copy_file(destfile,destfile + ".bak")
+			if os.path.isfile(destfile):
+				print("\n>>Backing up " + destfile)
+				copy_file(destfile,destfile + ".bak")
 			print(">>Copying file " + file['srcfile'])
 			copy_file(file['srcfile'],destfile)
 	
@@ -70,16 +71,17 @@ def _cleanup():
 			head,tail = os.path.split(file['srcfile'])
 			destfile = os.path.join(file['destdir'],tail)
 			destfilebak = destfile + ".bak"
-			if os.path.isfile(destfilebak):
+			if os.path.isfile(destfile):
 				print("\n>>Removing " + destfile)
 				os.remove(destfile)
+			if os.path.isfile(destfilebak):
 				print(">>Restoring " + destfilebak)
 				move_file(destfilebak,destfile)
 
 
-_copy_module_dirs()
-_copy_files()
 try:
+	_copy_module_dirs()
+	_copy_files()
 	print("\n-----MODULES COPIED-----\n")
 	_build()
 except Exception as e:
